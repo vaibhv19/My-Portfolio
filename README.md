@@ -1,7 +1,20 @@
-🌐 Personal Portfolio Website
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+</div>
 
-A modern, minimal, and responsive developer portfolio built using React and Tailwind CSS to showcase my work in backend development, AI integration, and real-world systems.
+# Run and deploy your AI Studio app
 
-🚀 Live Demo
+This contains everything you need to run your app locally.
 
-🔗 Add your deployed link here (Vercel/Netlify)
+View your app in AI Studio: https://ai.studio/apps/7381dc42-3448-4008-abae-94e6469b5346
+
+## Run Locally
+
+**Prerequisites:**  Node.js
+
+
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`
