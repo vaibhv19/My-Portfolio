@@ -1,10 +1,22 @@
 import { motion } from 'motion/react';
 import { Download, ChevronRight, User } from 'lucide-react';
 import { useState } from 'react';
-import profileImg from '../assets/profile.jpg';
 
 export default function Hero() {
+  const [imgSrc, setImgSrc] = useState(`/me.jpg?v=${Date.now()}`);
   const [hasError, setHasError] = useState(false);
+  const [isFallback, setIsFallback] = useState(false);
+
+  const handleImageError = () => {
+    console.log("Image loading failed, trying fallback...");
+    if (!isFallback) {
+      // Emergency remote fallback if local file fails
+      setImgSrc('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&q=80');
+      setIsFallback(true);
+    } else {
+      setHasError(true);
+    }
+  };
 
   return (
     <section className="flex items-center justify-center pt-8 px-4 overflow-hidden relative">
@@ -36,11 +48,11 @@ export default function Hero() {
             >
               {!hasError ? (
                 <img 
-                  src={profileImg} 
+                  src={imgSrc} 
                   alt="Vaibhav Gupta" 
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                   referrerPolicy="no-referrer"
-                  onError={() => setHasError(true)}
+                  onError={handleImageError}
                 />
               ) : (
                 <div className="flex items-center justify-center w-full h-full bg-zinc-100 dark:bg-zinc-800 text-brand-accent">

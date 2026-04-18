@@ -36,6 +36,6 @@
   }
   
   body {
-    @apply bg-brand-bg text-brand-text-p antialiased transition-colors duration-300;
+    @apply bg-brand-bg text-brand-text-p antialiased transition-colors duration-300 overflow-x-hidden;
   }
 }
