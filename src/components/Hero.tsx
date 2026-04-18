@@ -8,7 +8,7 @@ const IMAGE_PATHS = [
   '/vaibhav.jpeg',
   '/vaibhav.png',
   '/profile.jpg',
-  'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&fit=crop'
+  
 ];
 
 export default function Hero() {
