@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { Download, ChevronRight } from 'lucide-react';
+import profileImg from '../assets/profile.jpg';
 
 export default function Hero() {
   return (
@@ -31,7 +32,7 @@ export default function Hero() {
               className="w-40 h-40 rounded-3xl bg-zinc-200 dark:bg-zinc-800 border-2 border-brand-accent/20 flex-shrink-0 flex items-center justify-center overflow-hidden shadow-2xl ring-4 ring-brand-accent/5"
             >
                <img 
-                 src="/profile.jpg" 
+                 src={profileImg} 
                  alt="Vaibhav Gupta - Software Developer" 
                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                  referrerPolicy="no-referrer"
