@@ -104,7 +104,7 @@ export default function Chatbot() {
       let errorMessage = "Sorry, I'm having trouble connecting to my brain right now. Please try again later!";
       
       if (error?.message?.includes('API Key missing')) {
-        errorMessage = "I need a Gemini API Key to work! Please add your API key in the 'Settings > Secrets' menu of AI Studio.";
+        errorMessage = "I need a Gemini API Key to work! Please add your key as GEMINI_API_KEY1 in the 'Settings > Secrets' menu of AI Studio.";
       }
       
       setMessages(prev => [...prev, { role: 'bot', content: errorMessage }]);
