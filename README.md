@@ -7,10 +7,17 @@ A modern, minimal, and responsive developer portfolio built using React and Tail
 🔗(https://vaibhv19.vercel.app/)
 
 📂 Features
+
 Minimal, clean UI (dark-first design)
+
 Fully responsive layout
+
 Theme toggle (dark/light mode)
+
 Featured projects with live demos
+
 GitHub integration ("View More Projects")
+
 Resume download functionality
-Subtle chatbot UI (project assistant)
+
+Subtle chatbot(project assistant)
