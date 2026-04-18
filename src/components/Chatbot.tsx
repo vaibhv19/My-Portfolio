@@ -47,12 +47,22 @@ Guidelines:
 
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
   const [messages, setMessages] = useState([
     { role: 'bot', content: 'Hi! I am Vaibhav’s virtual assistant. Ask me anything about his projects, skills, or experience!' },
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Show tooltip after 2 seconds if not already open
+    const timer = setTimeout(() => {
+      if (!isOpen) setShowTooltip(true);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [isOpen]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -62,6 +72,7 @@ export default function Chatbot() {
 
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
+    setShowTooltip(false); // Hide tooltip on interaction
 
     const userMessage = { role: 'user', content: input };
     setMessages(prev => [...prev, userMessage]);
@@ -95,7 +106,29 @@ export default function Chatbot() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-[60]">
+    <div className="fixed bottom-6 right-6 z-[60] flex flex-col items-end">
+      <AnimatePresence>
+        {showTooltip && !isOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: 20, scale: 0.8 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            exit={{ opacity: 0, x: 20, scale: 0.8 }}
+            className="mb-3 px-4 py-2 bg-brand-card border border-brand-accent rounded-xl shadow-xl text-[12px] text-brand-text-p font-medium flex items-center gap-2 whitespace-nowrap"
+          >
+            <Bot size={14} className="text-brand-accent animate-bounce" />
+            <span>Explore my profile through the assistant.</span>
+            <button 
+              onClick={() => setShowTooltip(false)}
+              className="ml-2 hover:text-brand-accent transition-colors"
+            >
+              <X size={12} />
+            </button>
+            {/* Pointer arrow */}
+            <div className="absolute -bottom-2 right-6 w-4 h-4 bg-brand-card border-r border-b border-brand-accent rotate-45" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -167,7 +200,10 @@ export default function Chatbot() {
       </AnimatePresence>
 
       <motion.button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {
+          setIsOpen(!isOpen);
+          setShowTooltip(false);
+        }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className="w-14 h-14 rounded-full bg-brand-accent text-white flex items-center justify-center shadow-2xl hover:shadow-brand-accent/20 transition-all z-50 relative"

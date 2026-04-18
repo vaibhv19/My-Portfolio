@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 import { Download, ChevronRight, User } from 'lucide-react';
-import { useState } from 'react';
+import { useState, SyntheticEvent } from 'react';
 
 export default function Hero() {
   // Tiered loading: Local -> Drive (lh3 format) -> Unsplash Fallback
@@ -8,10 +8,10 @@ export default function Hero() {
   const [loadStep, setLoadStep] = useState(0); // 0: Local, 1: Drive, 2: Remote Fallback
   const [hasError, setHasError] = useState(false);
 
-  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+  const handleImageError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
     const target = e.currentTarget;
     if (loadStep === 0) {
-      console.warn(`Local image '/me.jpeg' failed (Status: ${target.complete}). Trying Google Drive link...`);
+      console.warn(`Local image '/me.jpg' failed (Status: ${target.complete}). Trying Google Drive link...`);
       setImgSrc('https://lh3.googleusercontent.com/d/10zi_xd6fh2ferfEpy6NBCdnOreYW8hEm');
       setLoadStep(1);
     } else if (loadStep === 1) {
