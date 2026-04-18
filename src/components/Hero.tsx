@@ -5,8 +5,8 @@ import { useState, useEffect } from 'react';
 // Using multiple possible paths for the image to maximize compatibility
 const IMAGE_PATHS = [
   `/vaibhav.jpeg?t=${Date.now()}`,
-  `/vaibhav.jpg?t=${Date.now()}`,
-  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop'
+  `/vaibhav.png?t=${Date.now()}`,
+
 ];
 
 export default function Hero() {
