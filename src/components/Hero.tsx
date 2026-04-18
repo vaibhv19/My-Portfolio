@@ -1,8 +1,13 @@
 import { motion } from 'motion/react';
 import { Download, ChevronRight, User } from 'lucide-react';
+import profileImg from '../assets/profile.jpg';
+import { useEffect } from 'react';
 
 export default function Hero() {
-  const profileSrc = "/profile.jpg";
+  useEffect(() => {
+    console.log("Profile Image URL:", profileImg);
+  }, []);
+
   return (
     <section className="flex items-center justify-center pt-8 px-4 overflow-hidden relative">
       <div className="w-full max-w-xl mx-auto z-10">
@@ -32,12 +37,12 @@ export default function Hero() {
               className="w-40 h-40 rounded-3xl bg-zinc-200 dark:bg-zinc-800 border-2 border-brand-accent/20 flex-shrink-0 flex items-center justify-center overflow-hidden shadow-2xl ring-4 ring-brand-accent/5 relative"
             >
                <img 
-                 src={profileSrc} 
+                 src={profileImg} 
                  alt="Vaibhav Gupta" 
                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                  referrerPolicy="no-referrer"
                  onError={(e) => {
-                   // Fallback to an icon if the image fails to load
+                   console.error("Profile Image failed to load at path:", profileImg);
                    e.currentTarget.style.display = 'none';
                    const parent = e.currentTarget.parentElement;
                    if (parent && !parent.querySelector('.fallback-icon')) {
