@@ -4,9 +4,9 @@ import { useState, useEffect } from 'react';
 
 // Using multiple possible paths for the image to maximize compatibility
 const IMAGE_PATHS = [
-  '/profile.jpg',
-  './profile.jpg',
-  '../assets/profile.jpg',
+  '/vaibhav.jpg',
+  './vaibhav.jpg',
+  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop'
 ];
 
 export default function Hero() {
