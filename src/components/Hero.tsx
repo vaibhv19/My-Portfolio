@@ -4,7 +4,10 @@ import { useState, useEffect } from 'react';
 
 // Using multiple possible paths for the image to maximize compatibility
 const IMAGE_PATHS = [
+  '/vaibhav.jpg',
   '/vaibhav.jpeg',
+  '/profile.jpg',
+  '/profile.jpeg',
   'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop' // Reliable fallback
 ];
 
