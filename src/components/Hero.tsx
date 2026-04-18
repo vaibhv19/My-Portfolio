@@ -4,20 +4,23 @@ import { useState, useEffect } from 'react';
 
 // Using multiple possible paths for the image to maximize compatibility
 const IMAGE_PATHS = [
-  `/vaibhav.jpeg?t=${Date.now()}`,
-  `/vaibhav.png?t=${Date.now()}`,
-
+  '/vaibhav.jpg',
+  '/vaibhav.jpeg',
+  '/vaibhav.png',
+  '/profile.jpg',
+  'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&fit=crop'
 ];
 
 export default function Hero() {
-  const [imgSrc, setImgSrc] = useState(IMAGE_PATHS[0]);
+  const [imgSrc, setImgSrc] = useState(`${IMAGE_PATHS[0]}?t=${Date.now()}`);
   const [pathIndex, setPathIndex] = useState(0);
   const [hasError, setHasError] = useState(false);
 
   const handleImageError = () => {
     if (pathIndex < IMAGE_PATHS.length - 1) {
-      setPathIndex(prev => prev + 1);
-      setImgSrc(IMAGE_PATHS[pathIndex + 1]);
+      const nextIndex = pathIndex + 1;
+      setPathIndex(nextIndex);
+      setImgSrc(`${IMAGE_PATHS[nextIndex]}?t=${Date.now()}`);
     } else {
       setHasError(true);
     }
