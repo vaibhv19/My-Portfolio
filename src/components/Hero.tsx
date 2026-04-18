@@ -1,12 +1,27 @@
 import { motion } from 'motion/react';
 import { Download, ChevronRight, User } from 'lucide-react';
-import profileImg from '../assets/profile.jpg';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+
+// Using multiple possible paths for the image to maximize compatibility
+const IMAGE_PATHS = [
+  '/profile.jpg',
+  './profile.jpg',
+  '../assets/profile.jpg',
+];
 
 export default function Hero() {
-  useEffect(() => {
-    console.log("Profile Image URL:", profileImg);
-  }, []);
+  const [imgSrc, setImgSrc] = useState(IMAGE_PATHS[0]);
+  const [pathIndex, setPathIndex] = useState(0);
+  const [hasError, setHasError] = useState(false);
+
+  const handleImageError = () => {
+    if (pathIndex < IMAGE_PATHS.length - 1) {
+      setPathIndex(prev => prev + 1);
+      setImgSrc(IMAGE_PATHS[pathIndex + 1]);
+    } else {
+      setHasError(true);
+    }
+  };
 
   return (
     <section className="flex items-center justify-center pt-8 px-4 overflow-hidden relative">
@@ -36,23 +51,19 @@ export default function Hero() {
               whileHover={{ rotate: 5, scale: 1.05 }}
               className="w-40 h-40 rounded-3xl bg-zinc-200 dark:bg-zinc-800 border-2 border-brand-accent/20 flex-shrink-0 flex items-center justify-center overflow-hidden shadow-2xl ring-4 ring-brand-accent/5 relative"
             >
-               <img 
-                 src={profileImg} 
-                 alt="Vaibhav Gupta" 
-                 className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                 referrerPolicy="no-referrer"
-                 onError={(e) => {
-                   console.error("Profile Image failed to load at path:", profileImg);
-                   e.currentTarget.style.display = 'none';
-                   const parent = e.currentTarget.parentElement;
-                   if (parent && !parent.querySelector('.fallback-icon')) {
-                     const icon = document.createElement('div');
-                     icon.className = 'fallback-icon flex items-center justify-center w-full h-full bg-zinc-100 dark:bg-zinc-800 text-brand-accent';
-                     icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
-                     parent.appendChild(icon);
-                   }
-                 }}
-               />
+              {!hasError ? (
+                <img 
+                  src={imgSrc} 
+                  alt="Vaibhav Gupta" 
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                  referrerPolicy="no-referrer"
+                  onError={handleImageError}
+                />
+              ) : (
+                <div className="flex items-center justify-center w-full h-full bg-zinc-100 dark:bg-zinc-800 text-brand-accent">
+                   <User size={64} />
+                </div>
+              )}
             </motion.div>
             <div className="text-center sm:text-left">
               <motion.span

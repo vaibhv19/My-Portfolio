@@ -18,32 +18,27 @@ export default function App() {
       <div className="min-h-screen bg-brand-bg text-brand-text-p selection:bg-brand-accent/30 selection:text-white">
         <Navbar />
         
-        <main className="max-w-[1400px] mx-auto px-6 lg:px-10 pt-[100px] pb-24 lg:grid lg:grid-cols-[1fr_1fr_1.1fr] gap-8">
-          {/* Column 1: Hero, About */}
-          <div className="flex flex-col gap-8">
-            <Hero />
-            
-            <section id="about" className="flex flex-col gap-4">
-              <h2 className="text-[12px] uppercase tracking-[1.5px] text-brand-accent font-semibold px-2">About</h2>
-              <About />
-            </section>
-          </div>
+        <main className="max-w-[800px] mx-auto px-6 lg:px-10 pt-[100px] pb-12 flex flex-col gap-12">
+          {/* Section 1: Hero */}
+          <Hero />
 
-          {/* Column 2: Projects */}
-          <div className="flex flex-col gap-8 mt-12 lg:mt-0">
-            <section id="projects" className="flex flex-col gap-4 h-full">
-              <h2 className="text-[12px] uppercase tracking-[1.5px] text-brand-accent font-semibold px-2">Featured Projects</h2>
-              <Projects />
-            </section>
-          </div>
+          {/* Section 2: About */}
+          <section id="about" className="flex flex-col gap-4">
+            <h2 className="text-[12px] uppercase tracking-[1.5px] text-brand-accent font-semibold px-2">About</h2>
+            <About />
+          </section>
 
-          {/* Column 3: Skills */}
-          <div className="flex flex-col gap-8 mt-12 lg:mt-0">
-            <section id="skills" className="flex flex-col gap-4">
-              <h2 className="text-[12px] uppercase tracking-[1.5px] text-brand-accent font-semibold px-2">Technical Expertise</h2>
-              <Skills />
-            </section>
-          </div>
+          {/* Section 3: Projects */}
+          <section id="projects" className="flex flex-col gap-4">
+            <h2 className="text-[12px] uppercase tracking-[1.5px] text-brand-accent font-semibold px-2">Featured Projects</h2>
+            <Projects />
+          </section>
+
+          {/* Section 4: Skills */}
+          <section id="skills" className="flex flex-col gap-4">
+            <h2 className="text-[12px] uppercase tracking-[1.5px] text-brand-accent font-semibold px-2">Technical Expertise</h2>
+            <Skills />
+          </section>
         </main>
 
         {/* Full-width Contact Section at bottom */}
