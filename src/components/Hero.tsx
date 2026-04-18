@@ -1,30 +1,10 @@
 import { motion } from 'motion/react';
 import { Download, ChevronRight, User } from 'lucide-react';
-import { useState, useEffect } from 'react';
-
-// Using multiple possible paths for the image to maximize compatibility
-const IMAGE_PATHS = [
-  '/vaibhav.jpg',
-  '/vaibhav.jpeg',
-  '/vaibhav.png',
-  '/profile.jpg',
-  
-];
+import { useState } from 'react';
+import profileImg from '../assets/profile.jpg';
 
 export default function Hero() {
-  const [imgSrc, setImgSrc] = useState(`${IMAGE_PATHS[0]}?t=${Date.now()}`);
-  const [pathIndex, setPathIndex] = useState(0);
   const [hasError, setHasError] = useState(false);
-
-  const handleImageError = () => {
-    if (pathIndex < IMAGE_PATHS.length - 1) {
-      const nextIndex = pathIndex + 1;
-      setPathIndex(nextIndex);
-      setImgSrc(`${IMAGE_PATHS[nextIndex]}?t=${Date.now()}`);
-    } else {
-      setHasError(true);
-    }
-  };
 
   return (
     <section className="flex items-center justify-center pt-8 px-4 overflow-hidden relative">
@@ -56,11 +36,11 @@ export default function Hero() {
             >
               {!hasError ? (
                 <img 
-                  src={imgSrc} 
+                  src={profileImg} 
                   alt="Vaibhav Gupta" 
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                   referrerPolicy="no-referrer"
-                  onError={handleImageError}
+                  onError={() => setHasError(true)}
                 />
               ) : (
                 <div className="flex items-center justify-center w-full h-full bg-zinc-100 dark:bg-zinc-800 text-brand-accent">
