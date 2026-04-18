@@ -82,8 +82,10 @@ export default function Chatbot() {
 
     try {
       const apiKey = process.env.GEMINI_API_KEY;
-      if (!apiKey) {
-        throw new Error('API Key missing. Please check your environment variables.');
+      const isPlaceholder = !apiKey || apiKey === 'MY_GEMINI_API_KEY' || apiKey === 'undefined' || apiKey === 'null';
+      
+      if (isPlaceholder) {
+        throw new Error('API Key missing');
       }
       
       const ai = new GoogleGenAI({ apiKey });
