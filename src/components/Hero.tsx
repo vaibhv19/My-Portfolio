@@ -3,18 +3,18 @@ import { Download, ChevronRight, User } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Hero() {
-  // Using tiered loading for the profile image: Drive -> Local -> Unsplash Fallback
-  const [imgSrc, setImgSrc] = useState('https://drive.google.com/uc?export=view&id=10zi_xd6fh2ferfEpy6NBCdnOreYW8hEm');
-  const [loadStep, setLoadStep] = useState(0); // 0: Drive, 1: Local, 2: Remote Fallback
+  // Simplified tiered loading: Local (with cache buster) -> Drive -> Unsplash Fallback
+  const [imgSrc, setImgSrc] = useState(`/me.jpg?v=${Date.now()}`);
+  const [loadStep, setLoadStep] = useState(0); // 0: Local, 1: Drive, 2: Remote Fallback
   const [hasError, setHasError] = useState(false);
 
   const handleImageError = () => {
     if (loadStep === 0) {
-      console.log("Drive image failed, trying local file...");
-      setImgSrc(new URL('/me.jpg', import.meta.url).href);
+      console.log("Local image failed, trying Drive link...");
+      setImgSrc('https://drive.google.com/uc?id=10zi_xd6fh2ferfEpy6NBCdnOreYW8hEm');
       setLoadStep(1);
     } else if (loadStep === 1) {
-      console.log("Local image failed, trying Unsplash fallback...");
+      console.log("Drive image failed, trying Unsplash fallback...");
       setImgSrc('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&q=80');
       setLoadStep(2);
     } else {
@@ -45,127 +45,79 @@ export default function Hero() {
           {/* Subtle background glow effect on the box */}
           <div className="absolute -inset-24 bg-brand-accent/5 blur-[100px] rounded-full opacity-0 group-hover/card:opacity-100 transition-opacity duration-1000 -z-10" />
 
-          {/* Profile Photo */}
-          <div className="flex flex-col sm:flex-row items-center gap-8 mb-10">
+          {/* Profile Photo & Name Section */}
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-10 mb-12">
             <motion.div 
-              whileHover={{ rotate: 5, scale: 1.05 }}
-              className="w-40 h-40 rounded-3xl bg-zinc-200 dark:bg-zinc-800 border-2 border-brand-accent/20 flex-shrink-0 flex items-center justify-center overflow-hidden shadow-2xl ring-4 ring-brand-accent/5 relative"
+              whileHover={{ scale: 1.02 }}
+              className="w-48 h-48 rounded-[32px] bg-zinc-800 border-4 border-brand-accent/20 flex-shrink-0 flex items-center justify-center overflow-hidden shadow-2xl relative"
             >
               {!hasError ? (
                 <img 
                   src={imgSrc} 
                   alt="Vaibhav Gupta" 
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover"
                   onError={handleImageError}
                 />
               ) : (
-                <div className="flex items-center justify-center w-full h-full bg-zinc-100 dark:bg-zinc-800 text-brand-accent">
-                   <User size={64} />
+                <div className="flex items-center justify-center w-full h-full bg-zinc-900 text-brand-accent">
+                   <User size={80} />
                 </div>
               )}
             </motion.div>
-            <div className="text-center sm:text-left">
+            
+            <div className="text-center sm:text-left flex flex-col justify-center h-48">
               <motion.span
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.05 }}
-                className="text-[12px] font-bold text-brand-text-s uppercase tracking-widest mb-1 block opacity-70"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-[12px] font-bold text-zinc-400 uppercase tracking-[0.2em] mb-3"
               >
                 Hi, I am
               </motion.span>
               <motion.h1
-                initial="initial"
-                animate="animate"
-                whileHover="hover"
-                variants={{
-                  initial: { opacity: 0 },
-                  animate: {
-                    opacity: 1,
-                    transition: {
-                      staggerChildren: 0.05,
-                      delayChildren: 0.2
-                    }
-                  },
-                  hover: {
-                    scale: 1.02,
-                    color: "var(--brand-accent)",
-                    transition: { duration: 0.3 }
-                  }
-                }}
-                className="text-[42px] font-black text-brand-text-p tracking-tighter leading-[0.9] uppercase cursor-default transition-colors duration-300 flex flex-col"
+                className="text-[48px] sm:text-[56px] font-black text-white tracking-tighter leading-[0.85] uppercase flex flex-col mb-4"
               >
-                <div className="flex justify-center sm:justify-start">
-                  {"Vaibhav".split("").map((char, index) => (
-                    <motion.span
-                      key={`vaibhav-${index}`}
-                      variants={{
-                        initial: { opacity: 0, y: 10 },
-                        animate: { opacity: 1, y: 0 }
-                      }}
-                      className="inline-block"
-                    >
-                      {char}
-                    </motion.span>
-                  ))}
-                </div>
-                <div className="flex justify-center sm:justify-start">
-                  {"Gupta".split("").map((char, index) => (
-                    <motion.span
-                      key={`gupta-${index}`}
-                      variants={{
-                        initial: { opacity: 0, y: 10 },
-                        animate: { opacity: 1, y: 0 }
-                      }}
-                      className="inline-block"
-                    >
-                      {char}
-                    </motion.span>
-                  ))}
-                </div>
+                <span>Vaibhav</span>
+                <span>Gupta</span>
               </motion.h1>
-              <motion.div 
-                initial={{ width: 0 }}
-                animate={{ width: "80px" }}
-                transition={{ delay: 1, duration: 0.8 }}
-                className="h-1 bg-brand-accent mt-2 rounded-full mx-auto sm:mx-0 shadow-[0_0_10px_rgba(16,185,129,0.5)]" 
-              />
+              <div className="h-1.5 w-32 bg-brand-accent rounded-full shadow-[0_0_15px_rgba(16,185,129,0.5)]" />
             </div>
           </div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-[14px] font-black uppercase tracking-[0.2em] text-brand-accent mb-6"
-          >
-            Software Developer
-          </motion.p>
+          <div className="text-left flex flex-col items-start px-2">
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="text-[16px] font-bold uppercase tracking-[0.15em] text-brand-accent mb-8"
+            >
+              Software Developer
+            </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="flex items-center gap-3"
-          >
-            <motion.a
-              href="#projects"
-              whileHover={{ scale: 1.02, backgroundColor: "var(--brand-accent)" }}
-              whileTap={{ scale: 0.98 }}
-              className="px-5 py-2 bg-brand-accent text-white rounded-[6px] text-xs font-bold transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:shadow-[0_0_20px_rgba(16,185,129,0.5)]"
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="flex items-center gap-4"
             >
-              View Projects
-            </motion.a>
-            <motion.a
-              href="/resume.pdf"
-              download
-              whileHover={{ scale: 1.02, borderColor: "var(--brand-accent)", color: "var(--brand-accent)" }}
-              whileTap={{ scale: 0.98 }}
-              className="px-5 py-2 border border-brand-border text-brand-text-p rounded-[6px] text-xs font-bold transition-all"
-            >
-              Resume
-            </motion.a>
-          </motion.div>
+              <motion.a
+                href="#projects"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-3 bg-brand-accent text-zinc-900 rounded-xl text-sm font-black transition-all shadow-[0_4px_20px_rgba(16,185,129,0.3)] hover:shadow-[0_4px_25px_rgba(16,185,129,0.5)]"
+              >
+                View Projects
+              </motion.a>
+              <motion.a
+                href="/resume.pdf"
+                download
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-3 border-2 border-zinc-800 bg-zinc-900/50 text-white rounded-xl text-sm font-bold transition-all hover:border-zinc-700"
+              >
+                Resume
+              </motion.a>
+            </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>
