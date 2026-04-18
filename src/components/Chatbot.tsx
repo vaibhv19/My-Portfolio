@@ -97,9 +97,15 @@ export default function Chatbot() {
 
       const botMessage = { role: 'bot', content: response.text || "I'm sorry, I couldn't process that. Could you try again?" };
       setMessages(prev => [...prev, botMessage]);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Chatbot Error:", error);
-      setMessages(prev => [...prev, { role: 'bot', content: "Sorry, I'm having trouble connecting to my brain right now. Please try again later!" }]);
+      let errorMessage = "Sorry, I'm having trouble connecting to my brain right now. Please try again later!";
+      
+      if (error?.message?.includes('API Key missing')) {
+        errorMessage = "I need a Gemini API Key to work! Please add your API key in the 'Settings > Secrets' menu of AI Studio.";
+      }
+      
+      setMessages(prev => [...prev, { role: 'bot', content: errorMessage }]);
     } finally {
       setIsLoading(false);
     }
