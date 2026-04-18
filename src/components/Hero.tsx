@@ -1,10 +1,8 @@
 import { motion } from 'motion/react';
-import { Download, ChevronRight } from 'lucide-react';
-import profile from "../assets/profile.jpg";
-
-
+import { Download, ChevronRight, User } from 'lucide-react';
 
 export default function Hero() {
+  const profileSrc = "/profile.jpg";
   return (
     <section className="flex items-center justify-center pt-8 px-4 overflow-hidden relative">
       <div className="w-full max-w-xl mx-auto z-10">
@@ -31,12 +29,24 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row items-center gap-8 mb-10">
             <motion.div 
               whileHover={{ rotate: 5, scale: 1.05 }}
-              className="w-40 h-40 rounded-3xl bg-zinc-200 dark:bg-zinc-800 border-2 border-brand-accent/20 flex-shrink-0 flex items-center justify-center overflow-hidden shadow-2xl ring-4 ring-brand-accent/5"
+              className="w-40 h-40 rounded-3xl bg-zinc-200 dark:bg-zinc-800 border-2 border-brand-accent/20 flex-shrink-0 flex items-center justify-center overflow-hidden shadow-2xl ring-4 ring-brand-accent/5 relative"
             >
                <img 
-                <img src={profile} alt="Profile" />
+                 src={profileSrc} 
+                 alt="Vaibhav Gupta" 
                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                  referrerPolicy="no-referrer"
+                 onError={(e) => {
+                   // Fallback to an icon if the image fails to load
+                   e.currentTarget.style.display = 'none';
+                   const parent = e.currentTarget.parentElement;
+                   if (parent && !parent.querySelector('.fallback-icon')) {
+                     const icon = document.createElement('div');
+                     icon.className = 'fallback-icon flex items-center justify-center w-full h-full bg-zinc-100 dark:bg-zinc-800 text-brand-accent';
+                     icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
+                     parent.appendChild(icon);
+                   }
+                 }}
                />
             </motion.div>
             <div className="text-center sm:text-left">
