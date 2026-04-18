@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-brand-bg: var(--brand-bg);
+  --color-brand-card: var(--brand-card);
+  --color-brand-accent: #10b981;
+  --color-brand-text-p: var(--brand-text-p);
+  --color-brand-text-s: var(--brand-text-s);
+  --color-brand-border: var(--brand-border);
+
+  --radius-brand: 12px;
+}
+
+:root {
+  --brand-bg: #0a0a0c;
+  --brand-card: #141417;
+  --brand-text-p: #f8fafc;
+  --brand-text-s: #94a3b8;
+  --brand-border: rgba(255, 255, 255, 0.08);
+}
+
+.light {
+  --brand-bg: #ffffff;
+  --brand-card: #f8fafc;
+  --brand-text-p: #0f172a;
+  --brand-text-s: #475569;
+  --brand-border: rgba(0, 0, 0, 0.08);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-brand-bg text-brand-text-p antialiased transition-colors duration-300;
+  }
+}
