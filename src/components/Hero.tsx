@@ -3,17 +3,22 @@ import { Download, ChevronRight, User } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Hero() {
-  const [imgSrc, setImgSrc] = useState(`/me.jpg?v=${Date.now()}`);
+  // Using tiered loading for the profile image: Drive -> Local -> Unsplash Fallback
+  const [imgSrc, setImgSrc] = useState('https://drive.google.com/uc?export=view&id=10zi_xd6fh2ferfEpy6NBCdnOreYW8hEm');
+  const [loadStep, setLoadStep] = useState(0); // 0: Drive, 1: Local, 2: Remote Fallback
   const [hasError, setHasError] = useState(false);
-  const [isFallback, setIsFallback] = useState(false);
 
   const handleImageError = () => {
-    console.log("Image loading failed, trying fallback...");
-    if (!isFallback) {
-      // Emergency remote fallback if local file fails
+    if (loadStep === 0) {
+      console.log("Drive image failed, trying local file...");
+      setImgSrc(new URL('/me.jpg', import.meta.url).href);
+      setLoadStep(1);
+    } else if (loadStep === 1) {
+      console.log("Local image failed, trying Unsplash fallback...");
       setImgSrc('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&q=80');
-      setIsFallback(true);
+      setLoadStep(2);
     } else {
+      console.log("All image sources failed.");
       setHasError(true);
     }
   };
