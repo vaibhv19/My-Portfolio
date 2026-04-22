@@ -4,9 +4,9 @@ import { Mail, Github, Linkedin, Code2, ArrowUpRight, Phone, MessageSquare } fro
 export default function Contact() {
   const contactInfo = [
     { 
-      name: 'Gmail',
+      name: 'Email',
       icon: <Mail size={24} />, 
-      href: 'https://mail.google.com/mail/?view=cm&fs=1&to=gvaibhav.business@gmail.com'
+      href: 'mailto:gvaibhav.business@gmail.com'
     },
    
     { 
