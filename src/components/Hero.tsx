@@ -26,6 +26,21 @@ export default function Hero() {
     }
   };
 
+  const resumeUrl = import.meta.env.VITE_RESUME_URL || "https://drive.google.com/file/d/1X7ON6o9T-47CrX83VmGR1aZmHrLTcRL6/view?usp=sharing";
+  
+  // Helper to ensure Google Drive links are viewable
+  const getProcessedResumeUrl = (url: string) => {
+    if (url.includes('drive.google.com')) {
+      const match = url.match(/\/d\/([a-zA-Z0-9-_]+)/);
+      if (match && match[1]) {
+        return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+      }
+    }
+    return url;
+  };
+
+  const finalResumeUrl = getProcessedResumeUrl(resumeUrl);
+
   return (
     <section key={theme} className="flex items-center justify-center pt-8 px-4 overflow-hidden relative">
       <div className="w-full max-w-xl mx-auto z-10">
@@ -142,7 +157,7 @@ export default function Hero() {
                 View Projects
               </motion.a>
               <motion.a
-                href="/resume.pdf"
+                href={finalResumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}

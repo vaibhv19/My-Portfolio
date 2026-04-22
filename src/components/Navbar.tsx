@@ -14,6 +14,20 @@ export default function Navbar() {
     { name: 'Contact', href: '#contact' },
   ];
 
+  const resumeUrl = import.meta.env.VITE_RESUME_URL || "https://drive.google.com/file/d/1X7ON6o9T-47CrX83VmGR1aZmHrLTcRL6/view?usp=sharing";
+  
+  const getProcessedResumeUrl = (url: string) => {
+    if (url.includes('drive.google.com')) {
+      const match = url.match(/\/d\/([a-zA-Z0-9-_]+)/);
+      if (match && match[1]) {
+        return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+      }
+    }
+    return url;
+  };
+
+  const finalResumeUrl = getProcessedResumeUrl(resumeUrl);
+
   return (
     <nav key={theme} className="fixed top-0 w-full z-50 bg-brand-bg/80 backdrop-blur-md border-b border-brand-border transition-all duration-300">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 h-[60px] flex items-center justify-between">
@@ -53,7 +67,7 @@ export default function Navbar() {
               {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
             </button>
             <a
-              href="/resume.pdf"
+              href={finalResumeUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-4 py-1.5 bg-brand-accent text-white rounded-[6px] text-xs font-semibold hover:opacity-90 transition-opacity"
@@ -101,7 +115,7 @@ export default function Navbar() {
                 </a>
               ))}
               <a
-                href="/resume.pdf"
+                href={finalResumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-3 px-8 py-4 bg-brand-accent text-white rounded-xl text-sm font-black uppercase tracking-widest"
