@@ -33,7 +33,7 @@ export default function Hero() {
     if (url.includes('drive.google.com')) {
       const match = url.match(/\/d\/([a-zA-Z0-9-_]+)/);
       if (match && match[1]) {
-        return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+        return `https://drive.google.com/file/d/${match[1]}/view`;
       }
     }
     return url;
