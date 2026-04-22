@@ -54,7 +54,8 @@ export default function Navbar() {
             </button>
             <a
               href="/resume.pdf"
-              download
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-2 px-4 py-1.5 bg-brand-accent text-white rounded-[6px] text-xs font-semibold hover:opacity-90 transition-opacity"
             >
               RESUME
@@ -101,11 +102,12 @@ export default function Navbar() {
               ))}
               <a
                 href="/resume.pdf"
-                download
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 px-6 py-4 bg-zinc-900 dark:bg-zinc-100 text-zinc-100 dark:text-zinc-900 rounded-xl text-sm font-bold"
               >
                 <Download size={18} />
-                Download Resume
+                View Resume
               </a>
             </div>
           </motion.div>

@@ -139,12 +139,13 @@ export default function Hero() {
               </motion.a>
               <motion.a
                 href="/resume.pdf"
-                download
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-8 py-3 border-2 border-brand-border bg-brand-card text-brand-text-p rounded-xl text-sm font-bold transition-all hover:border-brand-accent/50"
               >
-                Resume
+                View Resume
               </motion.a>
             </motion.div>
           </div>
