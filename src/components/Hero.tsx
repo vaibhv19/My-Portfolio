@@ -85,13 +85,14 @@ export default function Hero() {
                     transition: { staggerChildren: 0.1 }
                   }
                 }}
-                className="text-[48px] sm:text-[56px] font-black text-brand-text-p tracking-tighter leading-[0.85] uppercase flex flex-col mb-4"
+                className="text-[48px] sm:text-[56px] font-black tracking-tighter leading-[0.85] uppercase flex flex-col mb-4 transition-colors duration-500 text-brand-text-p"
               >
                 <motion.span
                   variants={{
                     initial: { opacity: 0, y: 20 },
                     animate: { opacity: 1, y: 0 }
                   }}
+                  className="block"
                 >
                   Vaibhav
                 </motion.span>
@@ -100,6 +101,7 @@ export default function Hero() {
                     initial: { opacity: 0, y: 20 },
                     animate: { opacity: 1, y: 0 }
                   }}
+                  className="block"
                 >
                   Gupta
                 </motion.span>

@@ -15,7 +15,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-brand-bg/80 dark:bg-brand-bg/80 backdrop-blur-md border-b border-brand-border transition-colors duration-300">
+    <nav className="fixed top-0 w-full z-50 bg-brand-bg/80 backdrop-blur-md border-b border-brand-border transition-all duration-300">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 h-[60px] flex items-center justify-between">
         <motion.a 
           href="#"
@@ -87,15 +87,15 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 overflow-hidden"
+            className="md:hidden bg-brand-bg border-b border-brand-border overflow-hidden"
           >
-            <div className="px-6 py-8 flex flex-col gap-6">
+            <div className="px-6 py-10 flex flex-col gap-8">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="text-2xl font-bold text-zinc-900 dark:text-zinc-100"
+                  className="text-2xl font-black text-brand-text-p uppercase tracking-tighter"
                 >
                   {link.name}
                 </a>
@@ -104,9 +104,9 @@ export default function Navbar() {
                 href="/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 px-6 py-4 bg-zinc-900 dark:bg-zinc-100 text-zinc-100 dark:text-zinc-900 rounded-xl text-sm font-bold"
+                className="flex items-center justify-center gap-3 px-8 py-4 bg-brand-accent text-white rounded-xl text-sm font-black uppercase tracking-widest"
               >
-                <Download size={18} />
+                <Download size={20} />
                 View Resume
               </a>
             </div>
