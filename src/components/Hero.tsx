@@ -1,8 +1,10 @@
 import { motion } from 'motion/react';
 import { Download, ChevronRight, User } from 'lucide-react';
 import { useState, SyntheticEvent } from 'react';
+import { useTheme } from '../ThemeContext';
 
 export default function Hero() {
+  const { theme } = useTheme();
   // Tiered loading: Local -> Drive (lh3 format) -> Unsplash Fallback
   const [imgSrc, setImgSrc] = useState('/me.jpg');
   const [loadStep, setLoadStep] = useState(0); // 0: Local, 1: Drive, 2: Remote Fallback
@@ -25,7 +27,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="flex items-center justify-center pt-8 px-4 overflow-hidden relative">
+    <section key={theme} className="flex items-center justify-center pt-8 px-4 overflow-hidden relative">
       <div className="w-full max-w-xl mx-auto z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
