@@ -30,8 +30,8 @@ export default function Projects() {
     },
     {
       title: 'Auth Service (Microservice)',
-      description: 'Securing distributed systems with Spring Security and JWT. A standalone Spring Boot microservice.',
-      tech: ['Spring Boot', 'Docker', 'JWT', 'Java'],
+      description: 'Built a secure authentication and authorization microservice using Spring Boot and Spring Security, implementing JWT-based login, refresh token flow, and role-based access control for scalable backend systems.',
+      tech: ['Spring Boot', 'Spring Security', 'JWT', 'Java', 'MySQL'],
       github: 'https://github.com/vaibhv19/Auth-service',
     },
   ];
