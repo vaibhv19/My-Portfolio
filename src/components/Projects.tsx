@@ -12,8 +12,8 @@ export default function Projects() {
     },
     {
       title: 'Smart Research Assistant',
-      description: 'AI-driven tool for summarizing technical papers. Spring Boot microservice architecture handles NLP offloading and user state.',
-      tech: ['Spring Boot', 'REST APIs', 'HTML','CSS'],
+      description: 'AI-powered browser extension for real-time webpage summarization, contextual insights, and intelligent research assistance using Spring Boot, Spring AI, and Gemini API.',
+      tech: ['Spring Boot', 'Spring AI', 'Gemini API', 'JavaScript', 'REST APIs', 'HTML', 'CSS'],
       github: 'https://github.com/vaibhv19/Smart-Research-Assistant',
     },
     {
