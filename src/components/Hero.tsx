@@ -5,25 +5,19 @@ import { useTheme } from '../ThemeContext';
 
 export default function Hero() {
   const { theme } = useTheme();
-  // Tiered loading: Local -> Drive (lh3 format) -> Unsplash Fallback
-  const [imgSrc, setImgSrc] = useState('/me.jpg');
-  const [loadStep, setLoadStep] = useState(0); // 0: Local, 1: Drive, 2: Remote Fallback
+  const baseImgSrc = `${import.meta.env.BASE_URL || '/'}me.jpg`.replace(/\/+/g, '/');
+  const [imgSrc, setImgSrc] = useState(baseImgSrc);
+  const [isImageLoading, setIsImageLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
-  const handleImageError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
-    const target = e.currentTarget;
-    if (loadStep === 0) {
-      console.warn(`Local image '/me.jpg' failed (Status: ${target.complete}). Trying Google Drive link...`);
-      setImgSrc('https://lh3.googleusercontent.com/d/10zi_xd6fh2ferfEpy6NBCdnOreYW8hEm');
-      setLoadStep(1);
-    } else if (loadStep === 1) {
-      console.warn("Google Drive link failed. Falling back to Unsplash photo.");
-      setImgSrc('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&q=80');
-      setLoadStep(2);
-    } else {
-      console.error("Critical: All image sources failed.");
-      setHasError(true);
-    }
+  const handleImageLoad = () => {
+    setIsImageLoading(false);
+  };
+
+  const handleImageError = () => {
+    console.warn(`Failed to load profile photo from path: ${imgSrc}. Gracefully falling back to a professional monogram.`);
+    setHasError(true);
+    setIsImageLoading(false);
   };
 
   const resumeUrl = import.meta.env.VITE_RESUME_URL || "https://drive.google.com/file/d/1X7ON6o9T-47CrX83VmGR1aZmHrLTcRL6/view?usp=sharing";
@@ -70,15 +64,25 @@ export default function Hero() {
               className="w-48 h-48 rounded-[32px] bg-brand-bg border-4 border-brand-accent/20 flex-shrink-0 flex items-center justify-center overflow-hidden shadow-2xl relative"
             >
               {!hasError ? (
-                <img 
-                  src={imgSrc} 
-                  alt="Vaibhav Gupta" 
-                  className="w-full h-full object-cover"
-                  onError={handleImageError}
-                />
+                <>
+                  <img 
+                    src={imgSrc} 
+                    alt="Vaibhav Gupta" 
+                    className={`w-full h-full object-cover transition-opacity duration-500 ${isImageLoading ? 'opacity-0' : 'opacity-100'}`}
+                    onLoad={handleImageLoad}
+                    onError={handleImageError}
+                  />
+                  {isImageLoading && (
+                    <div className="absolute inset-0 bg-brand-card flex flex-col items-center justify-center">
+                      <div className="w-8 h-8 border-3 border-brand-accent/20 border-t-brand-accent rounded-full animate-spin mb-2" />
+                      <span className="text-[8px] font-bold uppercase tracking-widest text-brand-text-s">Loading</span>
+                    </div>
+                  )}
+                </>
               ) : (
-                <div className="flex items-center justify-center w-full h-full bg-brand-bg text-brand-accent">
-                   <User size={80} />
+                <div className="flex flex-col items-center justify-center w-full h-full bg-linear-to-b from-brand-card to-brand-bg text-brand-accent select-none p-4 text-center">
+                  <span className="text-[48px] font-black tracking-tighter text-brand-accent leading-none">VG</span>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-brand-text-s mt-2">Vaibhav Gupta</span>
                 </div>
               )}
             </motion.div>
