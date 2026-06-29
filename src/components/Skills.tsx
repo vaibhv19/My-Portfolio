@@ -4,38 +4,20 @@ import { SkillGroup } from '../types';
 export default function Skills() {
   const skillGroups: SkillGroup[] = [
     {
-      category: 'Languages',
-      items: ['Java', 'Python'],
-    },
-    {
       category: 'Backend & Systems',
-      items: ['Gradle','Maven','JWT','Spring Boot', 'REST APIs', 'Microservices Architecture'],
+      items: ['Spring Boot', 'Spring Security (OAuth2/JWT)', 'Spring Cloud', 'Java 21', 'Flask', 'Python'],
     },
     {
-      category: 'Frontend',
-      items: ['React', 'React Native', 'Tailwind CSS'],
+      category: 'AI & Integrations',
+      items: ['Spring AI', 'Google Gemini API', 'OpenAI Whisper', 'RabbitMQ', 'RESTful APIs'],
     },
     {
-      category: 'Databases',
-      items: ['MySQL', 'MongoDB'],
+      category: 'Frontend & Mobile',
+      items: ['React', 'React Native', 'Chrome Extensions', 'Tailwind CSS'],
     },
     {
-      category: 'Cloud & DevOps',
-      items: ['AWS', 'Docker', 'Apache Kafka', 'VPS'],
-    },
-    {
-      category: 'Tools',
-      items: ['Git', 'GitHub', 'Linux'],
-    },
-    {
-      category: 'Core Computer Science',
-      items: [
-        'DSA',
-        'OS',
-        'DBMS',
-        'CN',
-        'OOP',
-      ],
+      category: 'Databases & Cloud',
+      items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Docker', 'AWS', 'Git & GitHub'],
     },
   ];
 
@@ -46,7 +28,7 @@ export default function Skills() {
       viewport={{ once: true }}
       className="bg-brand-card border border-brand-border rounded-brand p-6"
     >
-      <div className="grid grid-cols-1 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {skillGroups.map((group) => (
           <div key={group.category} className="skill-group">
             <h3 className="text-[11px] font-bold text-brand-text-p uppercase tracking-wider mb-2">

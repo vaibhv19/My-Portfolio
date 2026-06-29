@@ -5,33 +5,39 @@ import { Project } from '../types';
 export default function Projects() {
   const projects: Project[] = [
     {
-      title: 'AI Powered Fitness Application',
-      description: 'Personalized workout plans using AI. Built with a Spring Boot backend focusing on robust scalability and data management.',
-      tech: ['Spring Boot', 'React','Java','REST APIs', 'AI Integration'],
+      title: 'AI-Powered Fitness Application',
+      description: 'A distributed, multi-service fitness ecosystem with Keycloak OAuth2 login, event-driven tracking, and AI recommendations. Features centralized configuration, service discovery, RabbitMQ messaging, and a PostgreSQL/MongoDB backend.',
+      tech: ['Spring Boot', 'Spring Cloud', 'RabbitMQ', 'PostgreSQL', 'MongoDB', 'React', 'Keycloak', 'Gemini API'],
       github: 'https://github.com/vaibhv19/AI-Powered-Fittness-application',
     },
     {
       title: 'Smart Research Assistant',
-      description: 'AI-powered browser extension for real-time webpage summarization, contextual insights, and intelligent research assistance using Spring Boot, Spring AI, and Gemini API.',
-      tech: ['Spring Boot', 'Spring AI', 'Gemini API', 'JavaScript', 'REST APIs', 'HTML', 'CSS'],
+      description: 'An AI-powered browser extension and Spring Boot backend leveraging Google Gemini API. Instantly summarizes long articles, delivers contextual insights, and manages research notes within an elegant browser side panel.',
+      tech: ['Spring Boot', 'Spring AI', 'Gemini API', 'Chrome Extension', 'JavaScript', 'HTML', 'CSS'],
       github: 'https://github.com/vaibhv19/Smart-Research-Assistant',
     },
     {
-      title: 'AI Content Generator Platform',
-      description: 'Generative model platform. Orchestrated via Spring Boot with high-concurrency content processing pipelines.',
-      tech: ['Spring Boot', 'React', 'Open AI API'],
-      github: 'https://github.com/vaibhv19/AI-Content-Generator-Platform',
+      title: 'Automated Litter Detection System',
+      description: 'A prototype environmental safety system that detects waste and hazards from images using Google Gemini. Extracts GPS coordinates from EXIF metadata and dynamically plots registered alerts on a Leaflet map.',
+      tech: ['Flask', 'Python', 'Gemini API', 'Leaflet.js', 'EXIF Metadata'],
+      github: 'https://github.com/vaibhv19/Automated-Litter-detection-System',
     },
     {
-      title: 'Expense Tracker App',
-      description: 'Intuitive finance management. Backend powered by Spring Boot for secure transaction processing and auditing.',
-      tech: ['Spring Boot', 'REST APIs','AWS','Apache Kafka','VPS', 'React Native'],
-      github: 'https://github.com/vaibhv19/Expense-Tracker-App',
+      title: 'Audio to Text Transcriber',
+      description: 'A full-stack speech-to-text platform that lets users upload audio files, processes them securely via a Spring Boot backend, and transcribes the content using OpenAI Whisper through Spring AI.',
+      tech: ['Spring Boot', 'Spring AI', 'OpenAI Whisper', 'React', 'Vite', 'Java', 'REST APIs'],
+      github: 'https://github.com/vaibhv19/Audio-to-Text-Transcriber',
     },
     {
-      title: 'Auth Service (Microservice)',
-      description: 'Built a secure authentication and authorization microservice using Spring Boot and Spring Security, implementing JWT-based login, refresh token flow, and role-based access control for scalable backend systems.',
-      tech: ['Spring Boot', 'Spring Security', 'JWT', 'Java', 'MySQL'],
+      title: 'Stock Photo Generator',
+      description: 'A generative AI dashboard featuring smart conversational chat, dynamic recipe creation, and stock photo image generation from text prompts using OpenAI API integration through Spring AI.',
+      tech: ['Spring Boot', 'Spring AI', 'OpenAI API', 'React.js', 'Java', 'REST APIs'],
+      github: 'https://github.com/vaibhv19/Stock-Photo-Generator',
+    },
+    {
+      title: 'Auth Service',
+      description: 'A high-performance security microservice offering user signup, login, password hashing with BCrypt, refresh tokens, and stateless request authorization via custom JWT filters in Spring Security.',
+      tech: ['Spring Boot', 'Spring Security', 'JWT', 'Java', 'MySQL', 'Gradle'],
       github: 'https://github.com/vaibhv19/Auth-service',
     },
   ];
@@ -61,8 +67,8 @@ export default function Projects() {
               {project.description}
             </p>
 
-            <div className="flex items-center gap-3">
-              <div className="flex gap-1">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 justify-between">
+              <div className="flex flex-wrap gap-1.5 max-w-[80%]">
                 {project.tech.map((t) => (
                   <motion.span 
                     key={t}
@@ -73,7 +79,7 @@ export default function Projects() {
                   </motion.span>
                 ))}
               </div>
-              <div className="ml-auto flex gap-3">
+              <div className="flex gap-3 justify-end sm:ml-auto">
                 <a 
                   href={project.github} 
                   target="_blank" 
